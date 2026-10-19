@@ -57,3 +57,11 @@ body > footer:not(.site-footer) .wrap{display:flex;justify-content:space-between
  .split img{max-height:350px}
  body > section.cta{padding:60px 0}
 }
+
+/* Official Heyday white vector logo with integrated yellow/orange/blue stripes. */
+.site-header,body > header:not(.site-header){background:#24392f;color:#fff;border-bottom:0}
+.logo-link,.site-header .logo-link,body > header:not(.site-header) .logo-link{display:block;width:190px;max-width:42vw;flex:0 0 auto;line-height:0;text-decoration:none}
+.logo-link img,.site-header .logo-link img,body > header:not(.site-header) .logo-link img{display:block;width:100%;height:auto;object-fit:contain}
+.site-header .menu-toggle{color:#fff}
+.site-header .navlinks .nav-cta,body > header:not(.site-header) .links .button{border-color:#fff;color:#fff;background:transparent}
+@media(max-width:650px){.logo-link,.site-header .logo-link,body > header:not(.site-header) .logo-link{width:156px;max-width:55vw}}
