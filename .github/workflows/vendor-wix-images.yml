@@ -1,0 +1,59 @@
+name: Copy permitted Wix images
+on:
+  push:
+    paths:
+      - .github/workflows/vendor-wix-images.yml
+permissions:
+  contents: write
+jobs:
+  copy-images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch images and update references
+        run: |
+          set -euo pipefail
+          mkdir -p images
+          curl --fail --location --retry 3 --silent --show-error 'https://static.wixstatic.com/media/e1bbda_803967735cc64f85a67ede570cc320a6~mv2.png' -o images/heyday-family.png
+          curl --fail --location --retry 3 --silent --show-error 'https://static.wixstatic.com/media/e1bbda_e536cc737ce74e258945e27e46badb8a~mv2.jpg' -o images/construction-plans.jpg
+          curl --fail --location --retry 3 --silent --show-error 'https://static.wixstatic.com/media/03b303_937afa3f3f65413ebb336cfc59804486~mv2.jpg' -o images/completed-home.jpg
+          curl --fail --location --retry 3 --silent --show-error 'https://static.wixstatic.com/media/03b303_41859027497f4dd497d5c13ea31595d1~mv2.jpg' -o images/indoor-outdoor-home.jpg
+          curl --fail --location --retry 3 --silent --show-error 'https://static.wixstatic.com/media/03b303_33082db0b5064b3b9312e9f583172310~mv2.jpg' -o images/home-interior.jpg
+          python - <<'PY'
+          from pathlib import Path
+          for path in Path('images').iterdir():
+              b = path.read_bytes()
+              assert len(b) > 1024, f'Unexpected image size: {path}'
+              if path.suffix == '.png':
+                  assert b.startswith(bytes.fromhex('89504e470d0a1a0a')), f'Invalid PNG: {path}'
+              else:
+                  assert b.startswith(bytes.fromhex('ffd8ff')), f'Invalid JPEG: {path}'
+              print(path, len(b), 'bytes')
+          maps = {
+              'https://static.wixstatic.com/media/e1bbda_803967735cc64f85a67ede570cc320a6~mv2.png': 'images/heyday-family.png',
+              'https://static.wixstatic.com/media/e1bbda_e536cc737ce74e258945e27e46badb8a~mv2.jpg': 'images/construction-plans.jpg',
+              'https://static.wixstatic.com/media/03b303_937afa3f3f65413ebb336cfc59804486~mv2.jpg': 'images/completed-home.jpg',
+              'https://static.wixstatic.com/media/03b303_41859027497f4dd497d5c13ea31595d1~mv2.jpg': 'images/indoor-outdoor-home.jpg',
+              'https://static.wixstatic.com/media/03b303_33082db0b5064b3b9312e9f583172310~mv2.jpg': 'images/home-interior.jpg',
+              'https://static.wixstatic.com/media/e1bbda_803967735cc64f85a67ede570cc320a6~mv2.png/v1/fill/w_960,h_960,al_c,q_85/family%20picture%20construction.png': 'images/heyday-family.png'
+          }
+          for file in Path('.').glob('*.html'):
+              old = file.read_text()
+              new = old
+              for source, target in sorted(maps.items(), key=lambda x: -len(x[0])):
+                  new = new.replace(source, target)
+              if new != old:
+                  file.write_text(new)
+                  print('Updated', file)
+              assert 'static.wixstatic.com/media/' not in new, f'Unconverted image: {file}'
+          PY
+      - name: Commit images
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add images index.html who-we-are.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'Host Heyday photographs in repository instead of Wix'
+            git push
+          fi
