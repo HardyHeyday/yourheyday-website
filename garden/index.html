@@ -27,10 +27,7 @@ a{color:var(--green)}.status{font-size:15px;font-weight:650;color:#397348;margin
 @media(max-width:1050px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:650px){.grid{grid-template-columns:1fr}.card{min-height:0}.count{font-size:60px}main{padding:42px 20px 60px}.meta{margin:25px 0 30px}}
 </style></head>
 <body><main>
-<div class="eyebrow">Garden · Autumn planting</div>
-<h1>Counting down<br>to harvest.</h1>
-<p class="lead">Three beet varieties and Comanche leeks, growing toward harvest. Plus Everett’s official position on sweet peas.</p>
-<div class="meta"><span class="chip">Planted October 31, 2026</span><span class="chip" id="today">Today's date</span><span class="chip">Comanche sown September 19 · transplanted approximately October 25</span></div>
+<h1>Wronske Garden Winter '26-'27</h1>
 <section class="grid" aria-label="Beet maturity countdowns">
 <article class="card" data-days="50"><div class="art"><div class="beet red" aria-hidden="true"></div></div><h2>Red Ace</h2><p class="descriptor">Classic deep-red beet</p><div class="count" data-remaining>49</div><div class="unit">days until estimated maturity</div><div class="status" data-status></div><div class="progress" role="progressbar" aria-label="Red Ace growing progress" aria-valuemin="0" aria-valuemax="100"><div class="fill"></div></div><div class="split"><span data-elapsed>1 day grown</span><span>50-day variety</span></div><div class="harvest">Estimated harvest date<strong>December 20, 2026</strong></div></article>
 <article class="card" data-days="55"><div class="art"><div class="beet gold" aria-hidden="true"></div></div><h2>Boldor</h2><p class="descriptor">Golden-yellow beet</p><div class="count" data-remaining>54</div><div class="unit">days until estimated maturity</div><div class="status" data-status></div><div class="progress" role="progressbar" aria-label="Boldor growing progress" aria-valuemin="0" aria-valuemax="100"><div class="fill"></div></div><div class="split"><span data-elapsed>1 day grown</span><span>55-day variety</span></div><div class="harvest">Estimated harvest date<strong>December 25, 2026</strong></div></article>
@@ -45,7 +42,7 @@ function updateCountdown(){
  const year=get('year'),month=get('month'),day=get('day');
  const todayUTC=Date.UTC(year,month-1,day),planted=Date.UTC(2026,9,31);
  const beetElapsed=Math.round((todayUTC-planted)/86400000);
- document.querySelector('#today').textContent='Today · '+new Intl.DateTimeFormat('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(todayUTC));
+ 
  document.querySelectorAll('.card').forEach(card=>{
   const total=Number(card.dataset.days),start=card.dataset.start?Date.UTC(...card.dataset.start.split('-').map((v,i)=>i===1?Number(v)-1:Number(v))):planted,elapsed=Math.round((todayUTC-start)/86400000),remaining=Math.max(0,total-elapsed),grown=Math.min(total,Math.max(0,elapsed));
   card.querySelector('[data-remaining]').textContent=remaining;
