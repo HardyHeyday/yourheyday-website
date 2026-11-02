@@ -25,8 +25,23 @@ h1{font-family:Georgia,serif;font-size:clamp(23px,3.5vw,42px);line-height:1.03;l
 footer{border-top:1px solid var(--line);margin-top:44px;padding-top:20px;color:var(--muted);font-size:13px;line-height:1.7}
 a{color:var(--green)}.status{font-size:15px;font-weight:650;color:#397348;margin:12px 0 0;min-height:20px}
 @media(max-width:1050px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:650px){.grid{grid-template-columns:1fr}.card{min-height:0}.count{font-size:60px}main{padding:42px 20px 60px}.meta{margin:25px 0 30px}}
+
+[hidden]{display:none!important}
+.garden-toggle{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:50px;background:#e8eadd;margin-bottom:8px}
+.garden-toggle button{border:0;border-radius:40px;padding:10px 25px;font:600 14px system-ui;cursor:pointer;color:var(--muted);background:transparent;min-height:44px}
+.garden-toggle button[aria-pressed="true"]{background:var(--ink);color:#fffdf8}
+.garden-toggle button:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.work-planting{background:#fffdf8;border:1px solid var(--line);border-radius:18px;padding:24px}
+.work-planting h2{font:normal 27px Georgia,serif;margin:8px 0}
+.work-planting p{color:var(--muted);line-height:1.6}
+.planting-date{font-size:14px;font-weight:650;color:var(--green)}
+.crop-list{list-style:none;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.crop-list li{padding:18px 12px;background:#edf0e5;border-radius:12px;font:normal 21px Georgia,serif}
+@media(max-width:650px){.crop-list{grid-template-columns:repeat(2,minmax(0,1fr))}.work-planting{padding:20px}}
 </style></head>
 <body><main>
+<nav class="garden-toggle" aria-label="Garden section"><button type="button" data-section="home" aria-pressed="true" aria-controls="home-section">Home</button><button type="button" data-section="work" aria-pressed="false" aria-controls="work-section">Work</button></nav>
+<div id="home-section">
 <h1>Wronske Garden Winter '26-'27</h1>
 <section class="grid" aria-label="Beet maturity countdowns">
 <article class="card" data-days="50"><div class="art"><div class="beet red" aria-hidden="true"></div></div><h2>Red Ace</h2><p class="descriptor">Classic deep-red beet</p><div class="count" data-remaining>49</div><div class="unit">days until estimated maturity</div><div class="status" data-status></div><div class="progress" role="progressbar" aria-label="Red Ace growing progress" aria-valuemin="0" aria-valuemax="100"><div class="fill"></div></div><div class="split"><span data-elapsed>1 day grown</span><span>50-day variety</span></div><div class="harvest">Estimated harvest date<strong>December 20, 2026</strong></div></article>
@@ -35,7 +50,31 @@ a{color:var(--green)}.status{font-size:15px;font-weight:650;color:#397348;margin
 <article class="card" data-days="105" data-start="2026-10-25"><div class="art"><div class="leek-icon" aria-hidden="true"></div></div><h2>Comanche leeks</h2><p class="descriptor">Midseason leek with long, tender white shanks</p><div class="count" data-remaining>98</div><div class="unit">days until estimated maturity</div><div class="status" data-status></div><div class="progress" role="progressbar" aria-label="Comanche leek growing progress" aria-valuemin="0" aria-valuemax="100"><div class="fill"></div></div><div class="split"><span data-elapsed>7 days since transplant</span><span>105 days after transplant</span></div><div class="harvest">Estimated harvest date<strong>February 7, 2027</strong></div></article></section>
 <aside class="sweet-panel"><div><p class="eyebrow">Untracked but not forgotten</p><h2>Everett vs. sweet peas</h2><p>Sweet peas were planted. Everett hates sweet peas.<br>Official garden verdict: absolutely not. No countdown required.</p></div><svg class="sweet-art" viewBox="0 0 260 180" role="img" aria-label="Funny cartoon of Everett scowling at sweet pea flowers and giving them a thumbs-down"><rect x="1" y="1" width="258" height="178" rx="18" fill="#edf0e5"/><circle cx="73" cy="81" r="44" fill="#e9b784" stroke="#94694b" stroke-width="2"/><path d="M32 62 Q43 15 78 35 Q112 26 115 67 L103 58 Q72 39 32 62" fill="#694e38"/><path d="M49 74 l19 5 M80 78 l18 -6" stroke="#483b2f" stroke-width="5" stroke-linecap="round"/><circle cx="61" cy="85" r="3.5" fill="#333"/><circle cx="89" cy="85" r="3.5" fill="#333"/><path d="M59 113 Q76 99 94 113" stroke="#823c43" stroke-width="5" fill="none" stroke-linecap="round"/><text x="121" y="118" font-size="43">👎</text><path d="M189 145 Q194 106 193 49 M193 93 Q215 78 222 63 M190 113 Q171 99 166 86" stroke="#4c8753" stroke-width="5" fill="none"/><path d="M190 94 Q174 73 158 89 Q173 105 190 94 M194 113 Q217 95 227 109 Q208 127 194 113" fill="#6b9c60"/><g fill="#d988bc" stroke="#b96e9b" stroke-width="1.5"><ellipse cx="190" cy="42" rx="11" ry="23" transform="rotate(-25 190 42)"/><ellipse cx="194" cy="42" rx="11" ry="23" transform="rotate(35 194 42)"/><ellipse cx="194" cy="44" rx="14" ry="11"/></g><path d="M157 17 L243 101 M243 17 L157 101" stroke="#bd4d51" stroke-width="7" stroke-linecap="round"/></svg></aside>
 <footer>Maturity dates are estimates, not guaranteed harvest dates. Beet estimates count from direct seeding; Comanche’s 105-day estimate counts from transplanting (October 25 is an assumed date because the precise transplant date was not specified). Weather and growing conditions may change the actual harvest. Maturity values from <a href="https://www.johnnyseeds.com/vegetables/beets/round-red-beets/red-ace-f1-beet-seed-125.11.html">Red Ace</a>, <a href="https://www.johnnyseeds.com/vegetables/beets/specialty-beets/boldor-beet-seed-3121.11.html">Boldor</a>, and <a href="https://www.johnnyseeds.com/vegetables/beets/specialty-beets/chioggia-guardsmark-beet-seed-25.html">Chioggia Guardsmark</a>, and <a href="https://www.johnnyseeds.com/vegetables/leeks/comanche-f1-leek-seed-4053.54.html">Comanche leeks</a> at Johnny’s Selected Seeds.</footer>
+</div>
+<div id="work-section" hidden>
+<h1>Work Garden Winter '26-'27</h1>
+<section class="work-planting" aria-labelledby="yard-title">
+<div class="planting-date">Planted October 20, 2026</div>
+<h2 id="yard-title">Yard replanted</h2>
+<p>On October 20, we replanted the yard with L beans, strawberry clover, daikon, and hairy vetch.</p>
+<ul class="crop-list"><li>L beans</li><li>Strawberry clover</li><li>Daikon</li><li>Hairy vetch</li></ul>
+</section>
+</div>
 </main><script>
+function selectSection(section){
+ const selected=section==='work'?'work':'home';
+ document.getElementById('home-section').hidden=selected!=='home';
+ document.getElementById('work-section').hidden=selected!=='work';
+ document.querySelectorAll('[data-section]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.section===selected)));
+}
+document.querySelectorAll('[data-section]').forEach(button=>button.addEventListener('click',()=>{
+ const section=button.dataset.section;
+ history.replaceState(null,'','#'+section);
+ selectSection(section);
+}));
+selectSection(location.hash.slice(1));
+window.addEventListener('hashchange',()=>selectSection(location.hash.slice(1)));
+
 function updateCountdown(){
  const parts=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',year:'numeric',month:'numeric',day:'numeric'}).formatToParts(new Date());
  const get=k=>Number(parts.find(p=>p.type===k).value);
