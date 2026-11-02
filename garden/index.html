@@ -38,6 +38,28 @@ a{color:var(--green)}.status{font-size:15px;font-weight:650;color:#397348;margin
 .crop-list{list-style:none;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .crop-list li{padding:18px 12px;background:#edf0e5;border-radius:12px;font:normal 21px Georgia,serif}
 @media(max-width:650px){.crop-list{grid-template-columns:repeat(2,minmax(0,1fr))}.work-planting{padding:20px}}
+
+/* Work garden seasonal timeline */
+.season-intro{color:var(--muted);font-size:14px;line-height:1.6;margin:8px 0 18px}
+.timeline-legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;margin:18px 0 25px}
+.timeline-legend span{display:flex;align-items:center;gap:7px}
+.swatch{width:22px;height:10px;border-radius:10px;display:inline-block}
+.growth{background:#79a366}.bloom{background:#b577aa}.harvest-window{background:#d6a33e}
+.season-axis{display:grid;grid-template-columns:30fr 31fr 31fr 28fr 31fr;font-size:12px;color:var(--muted);padding:0 0 9px;border-bottom:1px solid var(--line)}
+.season-axis span{border-left:1px solid var(--line);padding-left:8px}
+.plant-row{padding:20px 0;border-bottom:1px solid var(--line)}
+.plant-row:last-of-type{border-bottom:0}
+.plant-heading{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:11px}
+.plant-heading h2{font:normal 23px Georgia,serif;margin:0}
+.plant-heading span{font-size:12px;color:var(--muted)}
+.season-bar{height:54px;background:#eeeee6;border-radius:8px;position:relative;overflow:hidden}
+.month-line{position:absolute;top:0;bottom:0;width:1px;background:#263c3112;z-index:1}
+.phase{position:absolute;height:17px;border-radius:5px;top:7px}
+.phase.bloom,.phase.harvest-window{top:30px}
+.today-line{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);z-index:2}
+.plant-notes{font-size:13px;line-height:1.6;color:var(--muted);margin:9px 0 0}
+.season-footnote{margin-top:23px;color:var(--muted);font-size:12px;line-height:1.7}
+@media(max-width:650px){.plant-heading{display:block}.plant-heading span{display:block;margin-top:5px}.season-axis{font-size:11px}.season-axis span{padding-left:4px}.timeline-legend{gap:10px}}
 </style></head>
 <body><main>
 <nav class="garden-toggle" aria-label="Garden section"><button type="button" data-section="home" aria-pressed="true" aria-controls="home-section">Home</button><button type="button" data-section="work" aria-pressed="false" aria-controls="work-section">Work</button></nav>
@@ -53,12 +75,15 @@ a{color:var(--green)}.status{font-size:15px;font-weight:650;color:#397348;margin
 </div>
 <div id="work-section" hidden>
 <h1>Work Garden Winter '26-'27</h1>
-<section class="work-planting" aria-labelledby="yard-title">
-<div class="planting-date">Planted October 20, 2026</div>
-<h2 id="yard-title">Yard replanted</h2>
-<p>On October 20, we replanted the yard with L beans, strawberry clover, daikon, and hairy vetch.</p>
-<ul class="crop-list"><li>L beans</li><li>Strawberry clover</li><li>Daikon</li><li>Hairy vetch</li></ul>
-</section>
+<div class="planting-date">Yard replanted October 20, 2026</div>
+<p class="season-intro">November 2026–March 2027 · Approximate seasonal windows for the Altadena yard.</p>
+<div class="timeline-legend" aria-label="Timeline legend"><span><i class="swatch growth"></i>Green growth / cover</span><span><i class="swatch bloom"></i>Flowering</span><span><i class="swatch harvest-window"></i>Root harvest</span><span>│ Today</span></div>
+<div class="season-axis" aria-hidden="true"><span>Nov '26</span><span>Dec</span><span>Jan '27</span><span>Feb</span><span>Mar</span></div>
+<article class="plant-row"><div class="plant-heading"><h2>Bell-Fava beans</h2><span>Green winter cover · winter–spring flowers</span></div><div class="season-bar" role="img" aria-label="Bell-Fava beans: Green growth: November–March. Possible flowering: December–March; cool weather may delay the main flush until February."><span class="month-line" style="left:19.868%"></span><span class="month-line" style="left:40.397%"></span><span class="month-line" style="left:60.927%"></span><span class="month-line" style="left:79.470%"></span><span class="phase growth" style="left:0.000%;width:100.000%" title="Estimated green growth / cover" aria-hidden="true"></span><span class="phase bloom" style="left:19.868%;width:80.132%" title="Possible flowering window" aria-hidden="true"></span><span class="today-line" hidden></span></div><p class="plant-notes">Green growth: November–March. Possible flowering: December–March; cool weather may delay the main flush until February.</p></article>
+<article class="plant-row"><div class="plant-heading"><h2>Strawberry clover</h2><span>Low green cover · later spring flowers</span></div><div class="season-bar" role="img" aria-label="Strawberry clover: Establishing in November, with green cover through March. Flowers generally arrive May–June, beyond this timeline."><span class="month-line" style="left:19.868%"></span><span class="month-line" style="left:40.397%"></span><span class="month-line" style="left:60.927%"></span><span class="month-line" style="left:79.470%"></span><span class="phase growth" style="left:9.272%;width:90.728%" title="Estimated green growth / cover" aria-hidden="true"></span><span class="today-line" hidden></span></div><p class="plant-notes">Establishing in November, with green cover through March. Flowers generally arrive May–June, beyond this timeline.</p></article>
+<article class="plant-row"><div class="plant-heading"><h2>Daikon</h2><span>Fast green growth · early root maturity</span></div><div class="season-bar" role="img" aria-label="Daikon: Root harvest: approximately November 29–December 29 (40–70 days after sowing). If left unharvested, plants may stay green and flower in spring; March flowering is tentative."><span class="month-line" style="left:19.868%"></span><span class="month-line" style="left:40.397%"></span><span class="month-line" style="left:60.927%"></span><span class="month-line" style="left:79.470%"></span><span class="phase growth" style="left:0.000%;width:100.000%" title="Estimated green growth / cover" aria-hidden="true"></span><span class="phase bloom" style="left:79.470%;width:20.530%" title="Possible flowering window" aria-hidden="true"></span><span class="phase harvest-window" style="left:18.543%;width:20.530%" title="Approximate root harvest window" aria-hidden="true"></span><span class="today-line" hidden></span></div><p class="plant-notes">Root harvest: approximately November 29–December 29 (40–70 days after sowing). If left unharvested, plants may stay green and flower in spring; March flowering is tentative.</p></article>
+<article class="plant-row"><div class="plant-heading"><h2>Hairy vetch</h2><span>Winter foliage · spring growth surge</span></div><div class="season-bar" role="img" aria-label="Hairy vetch: Slow establishment in November, then green winter growth with a spring surge. Flowers generally begin around April, beyond this timeline."><span class="month-line" style="left:19.868%"></span><span class="month-line" style="left:40.397%"></span><span class="month-line" style="left:60.927%"></span><span class="month-line" style="left:79.470%"></span><span class="phase growth" style="left:9.272%;width:90.728%" title="Estimated green growth / cover" aria-hidden="true"></span><span class="today-line" hidden></span></div><p class="plant-notes">Slow establishment in November, then green winter growth with a spring surge. Flowers generally begin around April, beyond this timeline.</p></article>
+<p class="season-footnote">Planning estimates, not observed plant stages. Exact window boundaries are approximate interpretations of California growing guidance, adjusted for an October 20 sowing; variety, moisture, shade, and weather can shift them by several weeks. Green bars assume plants remain in place, receive adequate moisture, and are not harvested or cut back. Bell-Fava flowers may start early; clover and vetch may bloom after this chart ends.<br>Sources: <a href="https://sarep.ucdavis.edu/covercrop/bellbean">UC SAREP · Bell beans</a> · <a href="https://sarep.ucdavis.edu/covercrop/strawberryclover">Strawberry clover</a> · <a href="https://sarep.ucdavis.edu/covercrop/hairyvetch">Hairy vetch</a> · <a href="https://ucanr.edu/site/uc-master-gardeners-santa-clara-county/daikon">UC Master Gardeners · Daikon</a></p>
 </div>
 </main><script>
 function selectSection(section){
@@ -75,6 +100,17 @@ document.querySelectorAll('[data-section]').forEach(button=>button.addEventListe
 selectSection(location.hash.slice(1));
 window.addEventListener('hashchange',()=>selectSection(location.hash.slice(1)));
 
+function updateSeasonToday(){
+ const local=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Los_Angeles',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+ const part=k=>Number(local.find(p=>p.type===k).value);
+ const today=Date.UTC(part('year'),part('month')-1,part('day'));
+ const first=Date.UTC(2026,10,1),last=Date.UTC(2027,3,1);
+ document.querySelectorAll('.today-line').forEach(marker=>{
+  marker.hidden=today<first||today>=last;
+  marker.style.left=Math.min(99.8,Math.max(0,(today-first)/(last-first)*100))+'%';
+ });
+}
+updateSeasonToday();setInterval(updateSeasonToday,60000);
 function updateCountdown(){
  const parts=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',year:'numeric',month:'numeric',day:'numeric'}).formatToParts(new Date());
  const get=k=>Number(parts.find(p=>p.type===k).value);
